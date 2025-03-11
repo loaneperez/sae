@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jscolor/2.0.4/jscolor.js"> </script>.
+
+</head>
+
+<body style="background: #E0DCD3;">
+
+    <nav style="background: #CBC9C5;" class="text-white fixed top-0 left-0 w-full z-50 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+               
+                <div class="text-black text-2xl font-bold">MaChaussure</div>
+
+                <ul class="text-black hidden md:flex space-x-6">
+                    <li><a href="#" class="hover:text-zinc-500 transition">Accueil</a></li>
+                    <li><a href="#" class="hover:text-zinc-500 transition">À propos</a></li>
+                    <li><a href="#" class="hover:text-zinc-500 transition">Acheter</a></li>
+                    <li><a href="#" class="hover:text-zinc-500 transition">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id="container">
+
+        <?xml version="1.0" encoding="UTF-8"?>
+        <svg id="product-svg" class="color-changing-svg" data-name="Calque 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450">
+          <defs>
+            <style>
+              .cls-1 {
+                fill: black;
+              }
+            </style>
+          </defs>
+          <path class="product-shape" class="cls-1" d="M67.27,150.64s-7.23,12.21-11.05,10.57c.48,4.23,20.39,17.12,23.6,19.1s46.11,18.96,50.75,20.05,53.91,13.67,64.57,30.25,14.36,23.68,14.95,28.27c3.73,1.59,52.82,14.15,52.82,14.15l32.76,8.24s19.49,4.03,25.35,3.84c-1.65-7.32-8.79-31.48-10.62-34.78s-4.94-17.34-21.69-33.13c-16.75-15.79-54.73-25.12-69.92-27.23s-66.81-11.07-66.81-11.07c0,0-49.79-10.16-55.46-14.83-2.29-1.46-29.25-13.44-29.25-13.44Z"/>
+          <path class="product-shape" class="cls-1" d="M79.89,140.66s-11.89,9.98-15.73,14.52-8,10.22-14.06,2.49c.7-6.98,3.52-18.98,3.52-18.98l3.95-11.84s3.14-7.54,4.6-17.04,5.68-19.61,5.68-19.61l-.54,20.55s-.65,10.65,2.92,16.28,8.91,13.35,9.68,13.63Z"/>
+          <path class="product-shape" class="cls-1" d="M390.38,203.93s23.11,18.17,28.56,47.77,7.01,37.13,7.01,37.13l65.17-3.38,38.16-4.93s31.67-5.19,26.48-18.95-23.11-23.89-53.22-34.53-53.22-18.43-53.22-18.43l-14.8-5.71-7.27-2.86-11.42-7.27-25.44,11.16Z"/>
+        </svg>
+
+        <img id="background-image" src="chaussure.png" alt="">
+
+    </div>
+
+    <input class="jscolor {onFineChange:'changeColor(this)'}" value="fff">
+
+
+    <script>
+
+let selectedShape = null; // Stocke la forme sélectionnée
+
+// Sélectionne tous les éléments SVG
+const shapes = document.querySelectorAll(".product-shape");
+
+// Ajout d'un événement de sélection
+shapes.forEach(shape => {
+    shape.addEventListener("click", (event) => {
+        // Retirer l'effet visuel de l'ancienne forme sélectionnée
+        if (selectedShape) {
+            selectedShape.style.opacity = "1"; // Remet l'opacité normale
+        }
+
+        // Met à jour l'élément sélectionné
+        selectedShape = event.target;
+        selectedShape.style.opacity = "0.8 "; // 
+    });
+});
+
+// Ajout d'un événement pour désélectionner en cliquant ailleurs dans le SVG
+document.getElementById("product-svg").addEventListener("click", (event) => {
+    if (!event.target.classList.contains("product-shape")) {
+        if (selectedShape) {
+            selectedShape.style.opacity = "1"; // Remet l'opacité normale
+            selectedShape = null;
+        }
+    }
+});
+
+// Change la couleur uniquement de l'élément sélectionné
+function changeColor(picker) {
+    if (selectedShape) {
+        selectedShape.style.fill= picker.toHEXString();
+    } else {
+        console.warn("Aucune forme sélectionnée !");
+    }
+}
+
+
+    </script>
+
+</body>
+
+</html>
