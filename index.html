@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.6/lottie.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jscolor/2.0.4/jscolor.js"> </script>.
 
 </head>
@@ -46,12 +47,32 @@
 
         <img id="background-image" src="chaussure.png" alt="">
 
+
     </div>
+    <div class="right-3" id="lottie"></div>
 
     <input class="jscolor {onFineChange:'changeColor(this)'}" value="fff">
 
+<script>
+    let animation = null; // Déclare animation comme variable globale pour pouvoir la modifier
 
-    <script>
+// Fonction pour lancer l'animation Lottie seulement après sélection de couleur
+function startLottieAnimation() {
+    if (animation) {
+        animation.destroy(); 
+    }
+    animation = bodymovin.loadAnimation({
+        container: document.getElementById('lottie'),
+        path: 'animation.json',
+        renderer: 'svg',
+        loop: false,
+        autoplay: true
+    });
+    animation.addEventListener('complete', function() {
+            animation.destroy(); // Supprime l'animation
+            document.getElementById('lottie').innerHTML = ''; // Vide le conteneur
+        });
+    }
 
 let selectedShape = null; // Stocke la forme sélectionnée
 
@@ -68,7 +89,7 @@ shapes.forEach(shape => {
 
         // Met à jour l'élément sélectionné
         selectedShape = event.target;
-        selectedShape.style.opacity = "0.8 "; // 
+        selectedShape.style.opacity = "0.8"; // Corrigé l'espace en trop dans "0.8 "
     });
 });
 
@@ -82,17 +103,16 @@ document.getElementById("product-svg").addEventListener("click", (event) => {
     }
 });
 
-// Change la couleur uniquement de l'élément sélectionné
+// Change la couleur uniquement de l'élément sélectionné et démarre l'animation
 function changeColor(picker) {
     if (selectedShape) {
-        selectedShape.style.fill= picker.toHEXString();
+        selectedShape.style.fill = picker.toHEXString();
+        startLottieAnimation(); // Lancer l’animation après sélection de la couleur
     } else {
         console.warn("Aucune forme sélectionnée !");
     }
 }
-
-
-    </script>
+</script>
 
 </body>
 

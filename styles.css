@@ -69,3 +69,13 @@ html {
 .color-changing-svg path {
     transition: fill 1s ease;
 }
+
+#lottie {
+    width: 20%;
+    height: 20%;
+    position: relative;
+    z-index: 3;
+    mix-blend-mode: multiply;
+    width: 100%;
+
+}
